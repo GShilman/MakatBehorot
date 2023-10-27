@@ -1,6 +1,5 @@
 #include <Servo.h>
 
-// #define MOTOR_POWER (1)
 #define PWM_INPUT_CYCLE_TIME_US (20000.0)
 #define PWM_INPUT_LOW_US (1000.0)
 #define PWM_INPUT_HIGH_US (2000.0)
@@ -9,11 +8,11 @@
 #define SERVO_MID (90)
 #define SERVO_MAX (180)
 
-#define SERVO_CLOCKWISE (80)
+#define SERVO_CLOCKWISE (79)
+#define SERVO_COUNTERCLOCKWISE (107)
 #define SERVO_STOP (93)
-#define SERVO_COUNTERCLOCKWISE (100)
 
-#define RELOAD_DELAY (250)
+#define RELOAD_DELAY (1550)
 
 #define MIN_AMMO (1)
 #define MAX_AMMO (3)
@@ -147,11 +146,11 @@ bool rotate_ammo(int servo_power)
   reload_servo.attach(PWM_OUT_RELOAD);
 
   reload_servo.write(servo_power);
-  while (digitalRead(DIGITAL_IN_SENSOR) == LOW) {}
+  // while (digitalRead(DIGITAL_IN_SENSOR) == LOW) {}
   delay(RELOAD_DELAY);
-  while (digitalRead(DIGITAL_IN_SENSOR) == HIGH) {}
+  // while (digitalRead(DIGITAL_IN_SENSOR) == HIGH) {}
   reload_servo.write(SERVO_STOP);
-
+  delay(500);
   reload_servo.detach();
 
   return true;
